@@ -51,6 +51,7 @@ const regsiterUser = (req, res) => __awaiter(void 0, void 0, void 0, function* (
                         userId: newUser.userId,
                         firstName: newUser.firstName,
                         lastName: newUser.lastName,
+                        email: newUser.email,
                         phone: newUser.phone,
                     },
                 },

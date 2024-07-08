@@ -43,6 +43,7 @@ export const regsiterUser = async (req: Request, res: Response) => {
             userId: newUser.userId,
             firstName: newUser.firstName,
             lastName: newUser.lastName,
+            email: newUser.email,
             phone: newUser.phone,
           },
         },
