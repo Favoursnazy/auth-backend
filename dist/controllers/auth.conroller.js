@@ -47,7 +47,7 @@ const regsiterUser = (req, res) => __awaiter(void 0, void 0, void 0, function* (
                 message: "Registration successful",
                 data: {
                     accessToken: (0, token_1.generateToken)(newUser.userId, newUser.email, res),
-                    data: {
+                    user: {
                         userId: newUser.userId,
                         firstName: newUser.firstName,
                         lastName: newUser.lastName,

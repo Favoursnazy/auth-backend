@@ -39,7 +39,7 @@ export const regsiterUser = async (req: Request, res: Response) => {
         message: "Registration successful",
         data: {
           accessToken: generateToken(newUser.userId, newUser.email, res),
-          data: {
+          user: {
             userId: newUser.userId,
             firstName: newUser.firstName,
             lastName: newUser.lastName,

@@ -16,5 +16,6 @@ const generateToken = (id, email, res) => {
         sameSite: "strict", // CSFR attack cross-site request fogery
         secure: process.env.NODE_ENV !== "development", //HTTPS
     });
+    return token;
 };
 exports.generateToken = generateToken;
