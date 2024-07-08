@@ -27,6 +27,7 @@ export const regsiterUser = async (req: Request, res: Response) => {
     });
 
     if (newUser) {
+      const token = await generateToken(newUser.userId, newUser.email, res);
       await prisma.organisation.create({
         data: {
           name: `${firstName}'s Organisation`,
@@ -38,7 +39,7 @@ export const regsiterUser = async (req: Request, res: Response) => {
         status: "success",
         message: "Registration successful",
         data: {
-          accessToken: generateToken(newUser.userId, newUser.email, res),
+          accessToken: token,
           user: {
             userId: newUser.userId,
             firstName: newUser.firstName,
@@ -48,6 +49,7 @@ export const regsiterUser = async (req: Request, res: Response) => {
           },
         },
       });
+      console.log(token);
     } else {
       res.status(400).json({
         status: "Bad request",

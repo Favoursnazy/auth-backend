@@ -35,6 +35,7 @@ const regsiterUser = (req, res) => __awaiter(void 0, void 0, void 0, function* (
             },
         });
         if (newUser) {
+            const token = yield (0, token_1.generateToken)(newUser.userId, newUser.email, res);
             yield prisma_1.default.organisation.create({
                 data: {
                     name: `${firstName}'s Organisation`,
@@ -46,7 +47,7 @@ const regsiterUser = (req, res) => __awaiter(void 0, void 0, void 0, function* (
                 status: "success",
                 message: "Registration successful",
                 data: {
-                    accessToken: (0, token_1.generateToken)(newUser.userId, newUser.email, res),
+                    accessToken: token,
                     user: {
                         userId: newUser.userId,
                         firstName: newUser.firstName,
@@ -56,6 +57,7 @@ const regsiterUser = (req, res) => __awaiter(void 0, void 0, void 0, function* (
                     },
                 },
             });
+            console.log(token);
         }
         else {
             res.status(400).json({
