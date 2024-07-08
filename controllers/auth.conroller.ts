@@ -48,7 +48,7 @@ export const regsiterUser = async (req: Request, res: Response) => {
         },
       });
     } else {
-      res.send({
+      res.status(400).json({
         status: "Bad request",
         message: "Registration unsuccessful",
         statusCode: 400,
