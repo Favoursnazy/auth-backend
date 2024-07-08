@@ -34,6 +34,11 @@ app.use((0, cookie_parser_1.default)());
 app.use("/auth", routes_1.authRoutes);
 app.use("/api", routes_1.orgRoutes);
 app.use("/api/users", routes_1.usersRoutes);
+app.get("/", (req, res) => {
+    res.status(200).json({
+        message: "Backend is running",
+    });
+});
 app.all("*", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     throw new not_found_error_1.NotFoundError();
 }));

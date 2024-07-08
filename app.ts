@@ -23,6 +23,12 @@ app.use("/auth", authRoutes);
 app.use("/api", orgRoutes);
 app.use("/api/users", usersRoutes);
 
+app.get("/", (req: Request, res: Response) => {
+  res.status(200).json({
+    message: "Backend is running",
+  });
+});
+
 app.all("*", async (req: Request, res: Response) => {
   throw new NotFoundError();
 });
