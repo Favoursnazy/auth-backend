@@ -35,7 +35,7 @@ const regsiterUser = (req, res) => __awaiter(void 0, void 0, void 0, function* (
             },
         });
         if (newUser) {
-            const token = yield (0, token_1.generateToken)(newUser.userId, newUser.email, res);
+            const token = (0, token_1.generateToken)(newUser.userId, newUser.email, res);
             yield prisma_1.default.organisation.create({
                 data: {
                     name: `${firstName}'s Organisation`,
@@ -57,13 +57,11 @@ const regsiterUser = (req, res) => __awaiter(void 0, void 0, void 0, function* (
                     },
                 },
             });
-            console.log(token);
         }
         else {
             res.status(400).json({
                 status: "Bad request",
                 message: "Registration unsuccessful",
-                statusCode: 400,
             });
         }
     }
@@ -79,16 +77,18 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const existingUser = yield prisma_1.default.user.findUnique({ where: { email } });
         if (existingUser &&
             (yield password_1.Password.compare(existingUser.password, password))) {
-            res.status(201).json({
+            res.status(200).json({
                 status: "success",
                 message: "Login successful",
                 data: {
                     accessToken: (0, token_1.generateToken)(existingUser.userId, existingUser.email, res),
-                    userId: existingUser.userId,
-                    fullName: existingUser.firstName,
-                    lastName: existingUser.lastName,
-                    email: existingUser.email,
-                    phone: existingUser.phone,
+                    user: {
+                        userId: existingUser.userId,
+                        fullName: existingUser.firstName,
+                        lastName: existingUser.lastName,
+                        email: existingUser.email,
+                        phone: existingUser.phone,
+                    },
                 },
             });
         }
@@ -97,7 +97,6 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             res.status(401).json({
                 status: "Bad request",
                 message: "Authentication failed",
-                statusCode: 401,
             });
         }
     }

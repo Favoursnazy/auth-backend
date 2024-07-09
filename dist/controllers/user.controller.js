@@ -31,6 +31,7 @@ const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 firstName: currentUser.firstName,
                 lastName: currentUser.lastName,
                 phone: currentUser.phone,
+                email: currentUser.email,
             },
         });
     }

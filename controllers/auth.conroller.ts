@@ -27,7 +27,7 @@ export const regsiterUser = async (req: Request, res: Response) => {
     });
 
     if (newUser) {
-      const token = await generateToken(newUser.userId, newUser.email, res);
+      const token = generateToken(newUser.userId, newUser.email, res);
       await prisma.organisation.create({
         data: {
           name: `${firstName}'s Organisation`,
@@ -49,12 +49,10 @@ export const regsiterUser = async (req: Request, res: Response) => {
           },
         },
       });
-      console.log(token);
     } else {
       res.status(400).json({
         status: "Bad request",
         message: "Registration unsuccessful",
-        statusCode: 400,
       });
     }
   } catch (error: any) {
@@ -73,7 +71,7 @@ export const loginUser = async (req: Request, res: Response) => {
       existingUser &&
       (await Password.compare(existingUser.password, password))
     ) {
-      res.status(201).json({
+      res.status(200).json({
         status: "success",
         message: "Login successful",
         data: {
@@ -82,11 +80,13 @@ export const loginUser = async (req: Request, res: Response) => {
             existingUser.email,
             res
           ),
-          userId: existingUser.userId,
-          fullName: existingUser.firstName,
-          lastName: existingUser.lastName,
-          email: existingUser.email,
-          phone: existingUser.phone,
+          user: {
+            userId: existingUser.userId,
+            fullName: existingUser.firstName,
+            lastName: existingUser.lastName,
+            email: existingUser.email,
+            phone: existingUser.phone,
+          },
         },
       });
     } else {
@@ -94,7 +94,6 @@ export const loginUser = async (req: Request, res: Response) => {
       res.status(401).json({
         status: "Bad request",
         message: "Authentication failed",
-        statusCode: 401,
       });
     }
   } catch (error: any) {

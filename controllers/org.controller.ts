@@ -97,7 +97,6 @@ export const createOrganisation = async (req: Request, res: Response) => {
       res.status(400).json({
         status: "Bad Request",
         message: "Client error",
-        statusCode: 400,
       });
     }
   } catch (error: any) {

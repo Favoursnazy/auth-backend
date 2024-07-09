@@ -20,6 +20,7 @@ export const getUser = async (req: Request, res: Response) => {
         firstName: currentUser.firstName,
         lastName: currentUser.lastName,
         phone: currentUser.phone,
+        email: currentUser.email,
       },
     });
   } catch (error) {}

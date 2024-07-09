@@ -110,7 +110,6 @@ const createOrganisation = (req, res) => __awaiter(void 0, void 0, void 0, funct
             res.status(400).json({
                 status: "Bad Request",
                 message: "Client error",
-                statusCode: 400,
             });
         }
     }
