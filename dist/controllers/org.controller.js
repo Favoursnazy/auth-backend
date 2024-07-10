@@ -34,12 +34,17 @@ const userOganisation = (req, res) => __awaiter(void 0, void 0, void 0, function
                         },
                     ],
                 },
+                select: {
+                    orgId: true,
+                    name: true,
+                    description: true,
+                },
             });
             res.status(200).json({
                 status: "success",
                 message: "User Organisations fetched!",
                 data: {
-                    organisation,
+                    organisations: organisation,
                 },
             });
         }

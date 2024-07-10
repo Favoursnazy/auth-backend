@@ -21,12 +21,17 @@ export const userOganisation = async (req: Request, res: Response) => {
             },
           ],
         },
+        select: {
+          orgId: true,
+          name: true,
+          description: true,
+        },
       });
       res.status(200).json({
         status: "success",
         message: "User Organisations fetched!",
         data: {
-          organisation,
+          organisations: organisation,
         },
       });
     } else {
